@@ -1,4 +1,4 @@
-package com.rozplochowski.coding;
+package com.rozplochowski.coding.arraystring;
 
 /**
  * For two strings s and t, we say "t divides s" if and only if s = t + t + t + ... + t + t

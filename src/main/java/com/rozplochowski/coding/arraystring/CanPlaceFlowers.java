@@ -1,4 +1,4 @@
-package com.rozplochowski.coding;
+package com.rozplochowski.coding.arraystring;
 
 /**
  * You have a long flowerbed in which some plots are planted, and some are not.

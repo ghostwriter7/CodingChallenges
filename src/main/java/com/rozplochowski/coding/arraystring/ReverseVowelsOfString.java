@@ -1,4 +1,4 @@
-package com.rozplochowski.coding;
+package com.rozplochowski.coding.arraystring;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package com.rozplochowski.coding;
+package com.rozplochowski.coding.arraystring;
 
 /**
  * There are n kids with candies.

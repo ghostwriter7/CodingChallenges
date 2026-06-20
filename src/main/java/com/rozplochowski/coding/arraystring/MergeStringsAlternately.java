@@ -1,4 +1,4 @@
-package com.rozplochowski.coding;
+package com.rozplochowski.coding.arraystring;
 
 /**
  * You are given two strings word1 and word2.
