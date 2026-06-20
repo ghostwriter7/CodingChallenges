@@ -23,24 +23,25 @@ class ReverseVowelsOfString {
     String reverseVowels(String s) {
         char[] chars = Arrays.copyOf(s.toCharArray(), s.length());
 
-        var lastVowel = s.length() - 1;
+        var l = 0;
+        var r = s.length() - 1;
 
-        for (var i = 0; i <= chars.length - 1; i++) {
-            if (lastVowel <= i) break;
-
-            var current = s.charAt(i);
+        while (l < r) {
+            var current = chars[l];
 
             if (current < VOWELS.length && VOWELS[current]) {
-                for (var j = lastVowel; j > i; j--) {
+                for (var j = r; j > l; j--) {
                     var next = s.charAt(j);
                     if (next < VOWELS.length && VOWELS[next]) {
-                        chars[i] = next;
+                        chars[l] = next;
                         chars[j] = current;
-                        lastVowel = j - 1;
+                        r = j - 1;
                         break;
                     }
                 }
             }
+
+            l++;
         }
 
         return new String(chars);
