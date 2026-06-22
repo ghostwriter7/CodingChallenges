@@ -29,3 +29,9 @@ List<Integer> divisors(int gcd) {
     return result;
 }
 ```
+
+# Mental model for the sliding-window
+1. Define what makes a window valid
+2. Expand greedily to the right
+3. When invalid, shrink from the left
+4. Record the answer when valid again
