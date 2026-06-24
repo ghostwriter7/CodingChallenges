@@ -1,4 +1,4 @@
-package com.rozplochowski.coding;
+package com.rozplochowski.coding.stack;
 
 /**
  * You are given a string s, which contains stars *.
