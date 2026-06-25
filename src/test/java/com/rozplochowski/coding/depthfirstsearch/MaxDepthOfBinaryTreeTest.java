@@ -1,8 +1,6 @@
 package com.rozplochowski.coding.depthfirstsearch;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import static com.rozplochowski.coding.depthfirstsearch.MaxDepthOfBinaryTree.TreeNode;
 
 import static org.junit.jupiter.api.Assertions.*;
 
