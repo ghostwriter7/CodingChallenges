@@ -35,3 +35,11 @@ List<Integer> divisors(int gcd) {
 2. Expand greedily to the right
 3. When invalid, shrink from the left
 4. Record the answer when valid again
+
+# Deleting a middle node in a Linked List
+Maintain two pointers, slow and fast. Slow moves one step at a time, while fast moves two steps at a time.
+When fast reaches the end, slow will be at the middle node. 
+Then, we can delete the middle node by updating the next pointer of the node before slow.
+
+# Reversing a Singly Linked List
+Iterate through the list, setting the next pointer of each node to the previous node (current head).
