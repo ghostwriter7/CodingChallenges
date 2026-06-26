@@ -1,4 +1,5 @@
 package com.rozplochowski.coding.depthfirstsearch;
+import com.rozplochowski.coding.TreeNode;
 
 /**
  * Given the root of a binary tree, return its maximum depth.

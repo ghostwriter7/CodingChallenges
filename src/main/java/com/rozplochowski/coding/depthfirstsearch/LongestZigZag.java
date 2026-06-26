@@ -1,4 +1,5 @@
 package com.rozplochowski.coding.depthfirstsearch;
+import com.rozplochowski.coding.TreeNode;
 
 /**
  * You are given the root of a binary tree.

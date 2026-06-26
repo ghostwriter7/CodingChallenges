@@ -1,6 +1,8 @@
 package com.rozplochowski.coding.breadthfirstsearch;
 
 
+import com.rozplochowski.coding.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

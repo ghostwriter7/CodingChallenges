@@ -1,5 +1,7 @@
 package com.rozplochowski.coding.depthfirstsearch;
 
+import com.rozplochowski.coding.TreeNode;
+
 /**
  * Given a binary tree root, a node X in the tree is named good if in the path from root to X there are no nodes with a value greater than X.
  * <p>
