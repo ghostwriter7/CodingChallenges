@@ -1,6 +1,8 @@
 package com.rozplochowski.coding;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class TreeNode {
@@ -16,6 +18,33 @@ public class TreeNode {
         this.val = val;
         this.left = left;
         this.right = right;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        TreeNode treeNode = (TreeNode) o;
+        return treeNode.toList().equals(toList());
+    }
+
+    public List<Integer> toList() {
+        List<Integer> result = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(this);
+
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            if (current == null) result.add(null);
+            else {
+                result.add(current.val);
+                queue.offer(current.left);
+                queue.offer(current.right);
+            }
+        }
+
+        return result;
     }
 
     public static TreeNode of(Integer[] array) {
