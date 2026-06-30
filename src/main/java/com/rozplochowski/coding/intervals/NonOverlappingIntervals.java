@@ -1,10 +1,6 @@
 package com.rozplochowski.coding.intervals;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Given an array of intervals `intervals` where intervals[i] = [starti, endi],
