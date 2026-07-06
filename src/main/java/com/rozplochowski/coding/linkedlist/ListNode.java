@@ -1,5 +1,8 @@
 package com.rozplochowski.coding.linkedlist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListNode {
 
     ListNode next;
@@ -16,4 +19,15 @@ public class ListNode {
         this.val = val;
         this.next = next;
     }
-}
+
+    public int[] toArray() {
+        List<Integer> list = new ArrayList<>();
+        var curr = this;
+        while (curr != null) {
+            list.add(curr.val);
+            curr = curr.next;
+        }
+
+        return list.stream().mapToInt(Integer::intValue).toArray();
+    }
+ }
