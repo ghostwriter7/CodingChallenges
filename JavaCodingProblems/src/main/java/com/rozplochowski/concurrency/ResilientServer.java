@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.concurrent.StructuredTaskScope;
@@ -29,7 +30,15 @@ public class ResilientServer {
     public void serve(ServerSocket serverSocket) throws IOException, InterruptedException {
         log("Server starting on port: %d".formatted(serverSocket.getLocalPort()));
 
-        try (var scope = StructuredTaskScope.open(StructuredTaskScope.Joiner.awaitAll())) {
+        var threadFactory = Thread.ofVirtual()
+                .name("handler-", 0)
+                .factory();
+
+        try (var scope = StructuredTaskScope.open(StructuredTaskScope.Joiner.awaitAll(), cf ->
+                cf.withTimeout(Duration.ofSeconds(10))
+                        .withThreadFactory(threadFactory)
+                        .withName("ConnectionHandler")
+                )) {
             serverSocket.setSoTimeout(1000);
 
             while (!Thread.currentThread().isInterrupted()) {
@@ -97,6 +106,6 @@ public class ResilientServer {
                 ? "VThread[#%d]".formatted(thread.threadId())
                 : thread.getName();
 
-        IO.println("%s %-12s: %s".formatted(time, name, message));
+        IO.println("%s %-12s: %s".formatted(time, thread.getName(), message));
     }
 }
