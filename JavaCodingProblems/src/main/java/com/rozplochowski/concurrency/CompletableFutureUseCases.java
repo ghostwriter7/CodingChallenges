@@ -1,9 +1,7 @@
 package com.rozplochowski.concurrency;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
+import java.util.Set;
+import java.util.concurrent.*;
 
 public class CompletableFutureUseCases {
 
@@ -68,8 +66,65 @@ public class CompletableFutureUseCases {
             executor.shutdown();
         }
 
+        // **************************************************
+
+        getUserId()
+                .thenComposeAsync(CompletableFutureUseCases::getProductsByUserId)
+                .join();
+
+        // **************************************************
+
+        var cf9 = CompletableFuture.supplyAsync(() -> {
+                    IO.println(Thread.currentThread().getName() + " computes a secret number");
+                    return ThreadLocalRandom.current().nextLong();
+                })
+                .thenApply(v -> {
+                    IO.println(Thread.currentThread().getName() + " multiplies a secret number " + v);
+                    return v * ThreadLocalRandom.current().nextInt(0, 500);
+                })
+                .thenAccept(v -> IO.println(Thread.currentThread().getName() + " prints a secret number " + v))
+                .join();
+
+        // **************************************************
+
+        CompletableFuture.supplyAsync(() -> {
+
+            if (ThreadLocalRandom.current().nextBoolean()) {
+                throw new RuntimeException("Random Exception");
+            }
+
+            return 5000;
+        })
+                .thenApplyAsync(v -> v * 2)
+                .thenAcceptAsync(v -> IO.println(Thread.currentThread().getName() + " prints 'v': " + v))
+                .exceptionallyAsync(ex -> {
+                    IO.println(Thread.currentThread().getName() + " handles exception: " + ex.getMessage());
+                    return null;
+                })
+                .join();
+
+        // **************************************************
+
+        CompletableFuture.supplyAsync(() -> 1)
+                .thenCombineAsync(CompletableFuture.supplyAsync(() -> 2), Integer::sum)
+                .thenComposeAsync(v -> CompletableFuture.supplyAsync(() -> v * 2))
+                .thenApplyAsync(v -> v + 51)
+                .thenAcceptAsync(v -> IO.println(Thread.currentThread().getName() + " prints 'v': " + v))
+                .join();
 
     }
 
+    private static CompletableFuture<Long> getUserId() {
+        return CompletableFuture.supplyAsync(() -> {
+            IO.println(Thread.currentThread().getName() + " fetches user ID");
+            return 1L;
+        });
+    }
 
+    private static CompletableFuture<Set<String>> getProductsByUserId(Long id) {
+        return CompletableFuture.supplyAsync(() -> {
+            IO.println(Thread.currentThread().getName() + " fetches products for user ID " + id);
+            return Set.of("Book", "Notebook");
+        });
+    }
 }
